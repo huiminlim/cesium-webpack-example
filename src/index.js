@@ -47,9 +47,9 @@ viewer.scene.terrainProvider = terrainProvider;
 viewer.scene.globe.terrainExaggeration = 1.0;
 
 // Add Cesium OSM Buildings, a global 3D buildings layer.
-var tileset = new Cesium3DTileset({
-  url: "http://localhost:8080/optimized-tiles/tileset.json",
-});
+var tileset = await Cesium3DTileset.fromUrl(
+  "http://localhost:8080/optimized-tiles/tileset.json"
+);
 viewer.scene.primitives.add(tileset);
 tileset.cacheBytes = 536870912 * 5;
 tileset.debugColorizeTiles = true;
