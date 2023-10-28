@@ -3,22 +3,39 @@ import {
   buildModuleUrl,
   ImageryLayer,
   TileMapServiceImageryProvider,
+  ProviderViewModel,
   UrlTemplateImageryProvider,
-  CesiumTerrainProvider,
 } from "cesium";
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "../src/css/main.css";
 
+var imageryProviders = [];
+
+imageryProviders.push(
+  new ProviderViewModel({
+    name: "MapBox Streets v11",
+    iconUrl: "./icon/mapBoxStreets.png",
+    tooltip: "MapBox Streets v11 Tiles",
+    category: "Offline",
+    creationFunction: function () {
+      return new UrlTemplateImageryProvider({
+        url: "http://localhost:8080/maps/{z}/{x}/{y}.png",
+        credit:
+          'Â© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> Â© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+        maximumLevel: 16,
+      });
+    },
+  })
+);
+
 const viewer = new Viewer("cesiumContainer", {
-  baseLayerPicker: false,
+  baseLayerPicker: true,
   baseLayer: ImageryLayer.fromProviderAsync(
     TileMapServiceImageryProvider.fromUrl(
       buildModuleUrl("Assets/Textures/NaturalEarthII")
     )
   ),
-  // imageryProvider: new UrlTemplateImageryProvider({
-  //   url: "http://localhost:8080/maps/{z}/{x}/{y}.png",
-  // }),
+  imageryProviderViewModels: imageryProviders,
 });
 
 // var terrainProvider = new CesiumTerrainProvider({
