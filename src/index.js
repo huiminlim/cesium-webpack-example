@@ -3,20 +3,11 @@ import {
   buildModuleUrl,
   ImageryLayer,
   TileMapServiceImageryProvider,
+  UrlTemplateImageryProvider,
+  CesiumTerrainProvider,
 } from "cesium";
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "../src/css/main.css";
-
-var imageryViewModels = [];
-
-// // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
-// const viewer = new Viewer("cesiumContainer", {
-//   // Hide the base layer picker
-//   baseLayerPicker: false,
-//   // baseLayer: new createTileMapServiceImageryProvider({
-//   //   url: buildModuleUrl("/Assets/Textures/NaturalEarthII"),
-//   // }),
-// });
 
 const viewer = new Viewer("cesiumContainer", {
   baseLayerPicker: false,
@@ -25,12 +16,14 @@ const viewer = new Viewer("cesiumContainer", {
       buildModuleUrl("Assets/Textures/NaturalEarthII")
     )
   ),
+  // imageryProvider: new UrlTemplateImageryProvider({
+  //   url: "http://localhost:8080/maps/{z}/{x}/{y}.png",
+  // }),
 });
 
-// var terrainProvider = new Cesium.CesiumTerrainProvider({
+// var terrainProvider = new CesiumTerrainProvider({
 //   url: "http://localhost:8080/terrain",
 // });
-
 // viewer.scene.terrainProvider = terrainProvider;
 // viewer.scene.globe.terrainExaggeration = 1.0;
 
