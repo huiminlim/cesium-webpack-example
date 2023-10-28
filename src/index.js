@@ -13,15 +13,13 @@ var imageryProviders = [];
 
 imageryProviders.push(
   new ProviderViewModel({
-    name: "MapBox Streets v11",
-    iconUrl: "./icon/mapBoxStreets.png",
-    tooltip: "MapBox Streets v11 Tiles",
+    name: "Singapore Google Maps",
+    iconUrl: "",
+    tooltip: "Singapore Google Maps",
     category: "Offline",
     creationFunction: function () {
       return new UrlTemplateImageryProvider({
         url: "http://localhost:8080/maps/{z}/{x}/{y}.png",
-        credit:
-          'Â© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> Â© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
         maximumLevel: 16,
       });
     },
